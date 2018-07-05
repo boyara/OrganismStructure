@@ -15,4 +15,12 @@ public class RedBloodCell extends Cell {
 		return super.toString();
 	}
 
+	public int getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(int velocity) {
+		this.velocity = velocity;
+	}
+
 }
