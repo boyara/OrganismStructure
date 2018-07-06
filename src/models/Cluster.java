@@ -15,6 +15,16 @@ public class Cluster {
 		this.cols = cols;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		String clusterToString = sb.append("----Cluster ").append(this.id).append("\n").toString();
+		for (Cell cell : cells) {
+			clusterToString = sb.append(cell.toString()).append("\n").toString();
+		}
+		return clusterToString;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -36,8 +46,8 @@ public class Cluster {
 	public ArrayList<Cell> getCells() {
 		return cells;
 	}
-	public void setCells(ArrayList<Cell> cells) {
-		this.cells = cells;
+	public void addCell(Cell cell) {
+		this.cells.add(cell);	
 	}
 	
 }

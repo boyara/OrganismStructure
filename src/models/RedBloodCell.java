@@ -11,8 +11,9 @@ public class RedBloodCell extends Cell {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		StringBuilder sb = new StringBuilder();
+		String redBloodCellToString = sb.append(super.toString()).append("--------Health: ").append(this.health).append(" | Velocity: ")
+				.append(this.velocity).append(" | Energy: ").append(this.)
 	}
 
 	public int getVelocity() {
