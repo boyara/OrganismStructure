@@ -4,10 +4,12 @@ public class Microbe extends Cell {
 
 	private int virulence;
 	private String microbeType;
+	private int energy;
 	
 	public Microbe(String id, int health, int positionRow, int positionCol, int virulence) {
 		super(id, health, positionRow, positionCol);
 		this.virulence = virulence;
+		this.setEnergy();
 	}
 	
 	@Override
@@ -32,4 +34,22 @@ public class Microbe extends Cell {
 		this.microbeType = microbeType;
 	}
 
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy() {
+		switch(microbeType) {
+		case "Bacteria":
+			this.energy = (this.health + this.virulence) / 3;
+			break;
+		case "Fungi":
+			this.energy = (this.health + this.virulence) / 4;
+			break;
+		case "Virus":
+			this.energy = this.health + this.virulence;
+			break;
+		}
+	}
+	
 }

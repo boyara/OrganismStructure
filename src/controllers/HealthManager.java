@@ -21,7 +21,7 @@ public class HealthManager {
 		boolean organismExists = false;
 		
 		for (Organism organism : organismList) {
-			if(organism.getName() == organismName) {
+			if(organism.getName().equals(organismName)) {
 				organismExists = true;
 				clusterCount += organism.getClusters().size();
 				for (Cluster cluster : organism.getClusters()) {

@@ -6,6 +6,7 @@ public class Cell {
 	protected int health;
 	protected int positionRow;
 	protected int positionCol;
+	protected int energy;
 	
 	public Cell(String id, int health, int positionRow, int positionCol) {
 		this.id = id;
@@ -14,12 +15,16 @@ public class Cell {
 		this.positionCol = positionCol;
 	}
 	
+	public Cell() {
+		
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		String cellToString = sb.append("------Cell ").append(this.id).append("[").append(this.positionRow)
+		sb.append("------Cell ").append(this.id).append("[").append(this.positionRow)
 				.append(",").append(this.positionCol).append("]").append("\n").toString();
-		return cellToString;
+		return sb.toString();
 	}
 	
 	public String getId() {
@@ -52,6 +57,14 @@ public class Cell {
 
 	public void setPositionCol(int positionCol) {
 		this.positionCol = positionCol;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy() {
+		
 	}
 	
 }

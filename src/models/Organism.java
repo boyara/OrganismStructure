@@ -6,15 +6,15 @@ public class Organism {
 
 	private String name;
 	private ArrayList<Cluster> clusters = new ArrayList<>();
+	private int nextClusterId = 0;
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		String organismToString = null;
 		for (Cluster cluster : clusters) {
-			organismToString = sb.append(cluster.toString()).append("\n").toString();
+			sb.append(cluster.toString()).append("\n").toString();
 		}
-		return organismToString;
+		return sb.toString();
 	}
 	
 	public Organism(String name) {
@@ -38,11 +38,12 @@ public class Organism {
 	}
 	
 	public void activateNextCluster() {
-		
+		clusters.get(nextClusterId).activateCluster();
+		nextClusterId++;
 	}
 	
 	public Cluster getNextCluster() {
-		Cluster nextCluster = null;
+		Cluster nextCluster = clusters.get(nextClusterId);
 		return nextCluster;
 	}
 }
