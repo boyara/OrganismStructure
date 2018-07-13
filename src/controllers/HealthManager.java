@@ -73,7 +73,6 @@ public class HealthManager {
 				organism.addCluster(newCluster);
 			}
 		}
-		
 		sb.append("Organism ").append(organismName).append(": Created cluster ").append(id).append("\n").toString();
 		return sb.toString();
 	}
