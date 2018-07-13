@@ -3,7 +3,6 @@ package models;
 public class RedBloodCell extends Cell {
 
 	private int velocity;
-	private int energy;
 	
 	public RedBloodCell(String id, int health, int positionRow, int positionCol, int velocity) {
 		super(id, health, positionRow, positionCol);

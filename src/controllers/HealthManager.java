@@ -133,7 +133,6 @@ public class HealthManager {
 		
 		Cluster currentCluster = null;
 		int cellCount = 0;
-		
 		for (Organism organism : organismList) {
 			if(organism.getName().equals(organismName)) {
 				organism.activateNextCluster();
@@ -143,7 +142,7 @@ public class HealthManager {
 		}
 		
 		sb.append("Organism ").append(organismName).append(": Activated cluster ")
-				.append(currentCluster.getId()).append(". Cells left: ").append(cellCount).append("\n").toString();
+				.append(currentCluster.getId()).append(". Cells left: ").append(cellCount).toString();
 		
 		return sb.toString();
 	}

@@ -81,17 +81,20 @@ public class Cluster {
 	}
 
 	private void cellBattle(Cell attacker, Cell target) {
-		if (currentCell.getId() == "WhiteBloodCell" || currentCell.getId() == "RedBloodCell") {
-			currentCell.health += target.getHealth();
-			for (Cell cell : cells) {
-				if (cell.equals(target)) {
-					cells.remove(cell);
+		String cellId = currentCell.getId();
+		if (cellId.length() >= 3) {
+			if (cellId.substring(0, 3).equals("WBC") || cellId.substring(0, 3).equals("RBC")) {
+				currentCell.health += target.getHealth();
+				currentCell.setEnergy();
+				for (Cell cell : cells) {
+					if (cell.equals(target)) {
+						cells.remove(cell);
+						break;
+					}
 				}
 			}
-		}
-
-		else if (currentCell.getId() == "Virus" || currentCell.getId() == "Fungi"
-				|| currentCell.getId() == "Bacteria") {
+		} else if (cellId.substring(0, 1).equals("V") || cellId.substring(0, 1).equals("F")
+				|| cellId.substring(0, 1).equals("B")) {
 			while (attacker.getHealth() > 0 && target.getHealth() > 0) {
 				target.setHealth(target.getHealth() - attacker.getEnergy());
 				target.setEnergy();
@@ -119,9 +122,10 @@ public class Cluster {
 				}
 
 				while (cells.size() > 1) {
+					boolean currentCellChanged = false;
 					for (Cell cell : cells) {
-						if (cell.getPositionCol() == cells.get(currentCellId).getPositionCol()
-								&& cell.getPositionRow() == cells.get(currentCellId).getPositionRow()
+						if (cell.getPositionRow() == cells.get(currentCellId).getPositionRow()
+								&& cell.getPositionCol() == cells.get(currentCellId).getPositionCol()
 								&& !cell.equals(cells.get(currentCellId))) {
 							Cell attacker = cells.get(currentCellId);
 							Cell target = cell;
@@ -130,26 +134,26 @@ public class Cluster {
 								return;
 							} else {
 								setCurrentCell();
+								currentCellChanged = true;
+								break;
 							}
 						} else {
 							if (cells.size() == 1) {
 								return;
 							}
-							while ((cell.getPositionCol() != cells.get(currentCellId).getPositionCol()
-									|| cell.getPositionRow() != cells.get(currentCellId).getPositionRow())
-									&& !cell.equals(cells.get(currentCellId))) {
-								if (currentCell.getPositionCol() < cols - 1) {
-									currentCell.setPositionCol(currentCell.getPositionCol() + 1);
-								} else {
-									currentCell.setPositionCol(0);
-									if (currentCell.getPositionRow() < rows - 1) {
-										currentCell.setPositionRow(currentCell.getPositionRow() + 1);
-									} else {
-										currentCell.setPositionRow(0);
-									}
-								}
-							}
 						}
+					}
+					if (currentCellChanged) {
+
+					} else if (currentCell.getPositionCol() < cols - 1) {
+						currentCell.setPositionCol(currentCell.getPositionCol() + 1);
+					} else {
+						if (currentCell.getPositionRow() < rows - 1) {
+							currentCell.setPositionRow(currentCell.getPositionRow() + 1);
+						} else {
+							currentCell.setPositionRow(0);
+						}
+						currentCell.setPositionCol(0);
 					}
 				}
 			}

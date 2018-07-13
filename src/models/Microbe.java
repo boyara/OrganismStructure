@@ -4,7 +4,6 @@ public class Microbe extends Cell {
 
 	private int virulence;
 	private String microbeType;
-	private int energy;
 	
 	public Microbe(String id, int health, int positionRow, int positionCol, int virulence) {
 		super(id, health, positionRow, positionCol);
