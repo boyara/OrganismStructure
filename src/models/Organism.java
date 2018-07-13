@@ -12,7 +12,7 @@ public class Organism {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Cluster cluster : clusters) {
-			sb.append(cluster.toString()).append("\n").toString();
+			sb.append(cluster.toString()).toString();
 		}
 		return sb.toString();
 	}
@@ -43,7 +43,13 @@ public class Organism {
 	}
 	
 	public Cluster getNextCluster() {
-		Cluster nextCluster = clusters.get(nextClusterId);
+		Cluster nextCluster;
+		if(clusters.size() > 1) {
+			nextCluster = clusters.get(nextClusterId);
+		}
+		else {
+			nextCluster = clusters.get(nextClusterId - 1);
+		}
 		return nextCluster;
 	}
 }

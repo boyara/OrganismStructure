@@ -9,13 +9,14 @@ public class Microbe extends Cell {
 	public Microbe(String id, int health, int positionRow, int positionCol, int virulence) {
 		super(id, health, positionRow, positionCol);
 		this.virulence = virulence;
-		this.setEnergy();
 	}
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString()).append("--------Health: ").append(this.health).append(" | Virulence: ")
+				.append(this.virulence).append(" | Energy: ").append(this.energy).toString();
+		return sb.toString();
 	}
 	
 	public int getVirulence() {

@@ -34,7 +34,7 @@ public class HealthManager {
 		if(organismExists) {
 			StringBuilder sb = new StringBuilder();
 			String checkString = sb.append("Organism - ").append(organismName).append("\n").append("--Clusters: ").append(clusterCount)
-					.append("\n").append("--Cells: ").append(cellCount).append("\n").append(currentOrganism.toString()).append("\n").toString();
+					.append("\n").append("--Cells: ").append(cellCount).append("\n").append(currentOrganism.toString()).toString();
 			return checkString;
 		}
 		
@@ -42,35 +42,31 @@ public class HealthManager {
 	}
 	public String createOrganism(String name) {
 		Organism newOrganism = new Organism(name);
-		boolean exists = false;
-		for (Organism organism : organismList) {
-			if(organism.getName() == name) {
-				exists = true;
-			}
-		}
-		if(!exists) {
+
+		StringBuilder sb = new StringBuilder();
+		if(!checkIfOrganismExists(name)) {
 			organismList.add(newOrganism);
-			StringBuilder sb = new StringBuilder();
-			String createdOrganism = sb.append("Created organism ").append(name).append("\n").toString();
-			return createdOrganism;
+			sb.append("Created organism ").append(name).toString();
+			return sb.toString();
 		}
 		else {
-			StringBuilder sb = new StringBuilder();
-			String organismExists = sb.append("Organism ").append(name).append(" already exists").append("\n").toString();
-			return organismExists;
+			sb.append("Organism ").append(name).append(" already exists").toString();
+			return sb.toString();
 		}
 	}
 	public String addCluster(String organismName, String id, int rows, int cols) {
-		
+
+		StringBuilder sb = new StringBuilder();
+
 		if(!checkIfOrganismExists(organismName)) {
-			return null;
+			return sb.toString();
 		}
 		
 		for (Organism organism : organismList) {
-			if(organism.getName() == organismName) {
+			if(organism.getName().equals(organismName)) {
 				for (Cluster cluster : organism.getClusters()) {
-					if(cluster.getId() == id) {
-						return null;
+					if(cluster.getId().equals(id)) {
+						return sb.toString();
 					}
 				}
 				Cluster newCluster = new Cluster(id, rows, cols);
@@ -78,16 +74,17 @@ public class HealthManager {
 			}
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		String createdCluster = sb.append("Organism ").append(organismName).append(": Created cluster ").append(id).append("\n").toString();
-		return createdCluster;
+		sb.append("Organism ").append(organismName).append(": Created cluster ").append(id).append("\n").toString();
+		return sb.toString();
 	}
 	
 	public String addCell(String organismName, String clusterId, String cellType,
 			String cellId, int health, int positionRow, int positionCol, int additionalProperty) {
+
+		StringBuilder sb = new StringBuilder();
 		
 		if(!checkIfOrganismExists(organismName)) {
-			return null;
+			return sb.toString();
 		}
 		
 		Cell newCell = null;
@@ -105,21 +102,22 @@ public class HealthManager {
 		case "Bacteria":
 			Microbe microbe = new Microbe(cellId, health, positionRow, positionCol, additionalProperty);
 			microbe.setMicrobeType(cellType);
+			microbe.setEnergy();
+			newCell = microbe;
 			break;
 		}
 		for (Organism organism : organismList) {
 			for (Cluster cluster : organism.getClusters()) {
-				if(cluster.getId() == clusterId) {
+				if(cluster.getId().equals(clusterId)) {
 					for (Cell cell : cluster.getCells()) {
-						if(cell.getId() == cellId) {
-							return null;
+						if(cell.getId().equals(cellId)) {
+							return sb.toString();
 						}
 					}
 					cluster.addCell(newCell);
-					StringBuilder sb = new StringBuilder();
-					String createdCell = sb.append("Organism ").append(organismName).append(": Created cell ").append(cellId)
+					sb.append("Organism ").append(organismName).append(": Created cell ").append(cellId)
 							.append(" in cluster ").append(clusterId).append("\n").toString();
-					return createdCell;
+					return sb.toString();
 				}
 			}
 		}
@@ -127,32 +125,33 @@ public class HealthManager {
 	}
 	
 	public String activateCluster(String organismName) {
+
+		StringBuilder sb = new StringBuilder();
 		
 		if(!checkIfOrganismExists(organismName)) {
-			return null;
+			return sb.toString();
 		}
 		
 		Cluster currentCluster = null;
 		int cellCount = 0;
 		
 		for (Organism organism : organismList) {
-			if(organism.getName() == organismName) {
+			if(organism.getName().equals(organismName)) {
 				organism.activateNextCluster();
 				currentCluster = organism.getNextCluster();
 				cellCount = currentCluster.getCells().size();
 			}
 		}
 		
-		StringBuilder sb = new StringBuilder();
-		String activatedCluster = sb.append("Organism ").append(organismName).append(": Activated cluster ")
+		sb.append("Organism ").append(organismName).append(": Activated cluster ")
 				.append(currentCluster.getId()).append(". Cells left: ").append(cellCount).append("\n").toString();
 		
-		return activatedCluster;
+		return sb.toString();
 	}
 	
 	public boolean checkIfOrganismExists(String organismName) {
 		for (Organism organism : organismList) {
-			if(organism.getName() == organismName) {
+			if(organism.getName().equals(organismName)) {
 				return true;
 			}
 		}

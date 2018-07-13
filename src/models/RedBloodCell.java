@@ -14,9 +14,9 @@ public class RedBloodCell extends Cell {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		String redBloodCellToString = sb.append(super.toString()).append("--------Health: ").append(this.health).append(" | Velocity: ")
+		sb.append(super.toString()).append("--------Health: ").append(this.health).append(" | Velocity: ")
 				.append(this.velocity).append(" | Energy: ").append(this.energy).toString();
-		return redBloodCellToString;
+		return sb.toString();
 	}
 
 	public int getVelocity() {
