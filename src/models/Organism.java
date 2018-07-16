@@ -39,7 +39,6 @@ public class Organism {
 	
 	public void activateNextCluster() {
 		clusters.get(nextClusterId).activateCluster();
-		nextClusterId++;
 	}
 	
 	public Cluster getNextCluster() {
@@ -50,6 +49,7 @@ public class Organism {
 		else {
 			nextCluster = clusters.get(nextClusterId - 1);
 		}
+		nextClusterId++;
 		return nextCluster;
 	}
 }

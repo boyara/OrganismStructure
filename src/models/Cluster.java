@@ -98,6 +98,7 @@ public class Cluster {
 			while (attacker.getHealth() > 0 && target.getHealth() > 0) {
 				target.setHealth(target.getHealth() - attacker.getEnergy());
 				target.setEnergy();
+				if(target.getHealth() <= 0) break;
 				attacker.setHealth(attacker.getHealth() - target.getEnergy());
 				attacker.setEnergy();
 			}
